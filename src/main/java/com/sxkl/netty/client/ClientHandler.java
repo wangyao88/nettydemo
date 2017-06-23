@@ -27,6 +27,6 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
     }  
 
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {  
-        System.out.println("【client exception is general】");  
+    	log.error("客户端发生错误!错误信息:{}",cause.getMessage());
     }  
 }  

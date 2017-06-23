@@ -1,5 +1,7 @@
 package com.sxkl.netty.server;
 
+import lombok.extern.slf4j.Slf4j;
+
 import com.sxkl.netty.utils.Configuration;
 
 import io.netty.bootstrap.ServerBootstrap;
@@ -24,6 +26,7 @@ import io.netty.util.CharsetUtil;
  * @date 2016年8月4日 下午5:02:05
  * 
  */
+@Slf4j
 public class NettyServer {
 	// ip 地址
 	private static String IP = "127.0.0.1";
@@ -52,10 +55,10 @@ public class NettyServer {
 		});
 		IP = Configuration.getProperty("nioServerIp");
 		PORT = Integer.parseInt(Configuration.getProperty("nioServerPort"));
-		System.out.println("【TCP服务器IP】" + IP + "【TCP服务器PORT】" + PORT);
+		log.info("TCP服务器IP:{}. TCP服务器PORT:{}",IP,PORT);
 		ChannelFuture f = bootstrap.bind(IP, PORT).sync();
 		f.channel().closeFuture().sync();
-		System.out.println("TCP服务器已启动");
+		log.info("TCP服务器已启动");
 	}
 
 	protected static void shutdown() {
@@ -64,9 +67,9 @@ public class NettyServer {
 	}
 
 	public static void main(String[] args) throws Exception {
-		System.out.println("初始化配置文件...");
+		log.info("初始化配置文件...");
 		Configuration.init();
-		System.out.println("开始启动TCP服务器...");
+		log.info("开始启动TCP服务器...");
 		NettyServer.init();
 		// HelloServer.shutdown();
 	}

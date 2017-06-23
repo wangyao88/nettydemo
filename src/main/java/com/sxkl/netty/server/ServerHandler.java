@@ -28,11 +28,10 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
     } 
     
     public void channelActive(ChannelHandlerContext ctx) throws Exception {  
-        System.out.println("【channelActive】。。。");  
+        log.info("客户端请求连接"); 
     }  
 
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {  
-        System.out.println("【exception is general】");  
-        System.out.println(cause.getMessage());
+        log.error("服务端发生错误!错误信息:{}",cause.getMessage());
     }  
 }  
